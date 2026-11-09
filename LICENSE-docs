@@ -1,0 +1,25 @@
+Documentation and the expression taxonomy: CC BY-NC-SA 4.0
+============================================================
+
+The following are licensed under Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International:
+
+  - README.md, README.zh-CN.md
+  - MANIFESTO.md
+  - SPEC.md
+  - everything under docs/
+  - the expression taxonomy (the 71 named expressions and their semantics)
+  - all images and animations under assets/
+
+You are free to share and adapt this material for non-commercial purposes,
+provided you give appropriate credit and license derivative works under the
+same terms.
+
+Full text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+Source code and the wire protocol implementation remain under Apache-2.0
+(see LICENSE). Where the two overlap, Apache-2.0 governs the code and
+CC BY-NC-SA 4.0 governs the prose and taxonomy.
+
+Commercial use of the documentation or taxonomy requires written permission:
+  MAC-Lab, Hefei University of Technology
