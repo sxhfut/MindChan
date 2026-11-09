@@ -209,6 +209,19 @@ not in a whitelist, any field the firmware clamps differently from the spec, and
 action with no output — then call it from the test suite rather than by hand. Write-up in
 [`docs/06-embodied-mapping.md`](docs/06-embodied-mapping.md).
 
+### And one that no failure signal ever pointed at
+
+We published a behaviour for two days — *when you speak to it, it looks up at you* — that had
+never once happened. The comment described an intent; the code turned the face attentive and
+recentred the eyes; the test asserted the face. The gimbal was driven by the camera and never
+moved. Three layers, each internally consistent, collectively wrong in the same direction.
+
+That one has its own write-up, along with the noise-floor bug it exposed (**the longer you talk,
+the earlier it stops listening**) and two lessons from the language side — `{ }` is valid JSON, so
+`format: "json"` guarantees nothing; and a 4B asked for information it never received will invent
+something shaped exactly like the real thing:
+[`docs/07-hearing-and-looking.md`](docs/07-hearing-and-looking.md).
+
 ---
 
 ## Why not spritesheets?
@@ -304,6 +317,8 @@ What we *are* publishing, over time:
   ([`docs/05-perception-bugs.md`](docs/05-perception-bugs.md))
 - [x] Embodied mapping field notes — *twenty continuous parameters, and the actions it refuses
   to fake* ([`docs/06-embodied-mapping.md`](docs/06-embodied-mapping.md))
+- [x] Hearing field notes — *a claim that was green for two days and had never once
+  happened* ([`docs/07-hearing-and-looking.md`](docs/07-hearing-and-looking.md))
 - [ ] Gaze controller (camera → look-at-point)
 - [ ] Dual-mic direction-of-arrival — *"it turns when you call it"*
 - [ ] Touch–affect calibration data (n=1, then n=36)
