@@ -274,3 +274,6 @@ levels *at the colour you are quantising to*. And keep events and states in sepa
 Open an issue with the exact symptom. Six of these seven were found by noticing that the
 symptom and the cause lived in different subsystems, and a symptom log is the only way that
 pattern becomes visible to anyone else.
+
+There is a [second set](05-perception-bugs.md) — the perception bugs, where the symptom does
+not look like a bug at all but like *character*: "it seems uninterested today".

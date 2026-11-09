@@ -86,7 +86,10 @@ telemetry packet, so you can re-run any of these claims yourself.
 
 ## What this is not
 
-- **Not a chatbot.** There is no language model in here, and there will not be one.
+- **Not a chatbot.** There is no language model in the device, and there will not be one. It
+  makes non-verbal sounds only — a sigh, a questioning "hmm?", a soft "mmm", a gasp. Words
+  live on the host side (a local 4B model, offline, ~200 ms per turn) and stay with the mind
+  layer, out of this repo. A body that mumbles is different from a body that talks.
 - **Not a firmware drop.** This repository is the **body layer** plus the field notes.
   The engine implementation stays private (see [*What's missing*](#whats-missing)).
 - **Not a product.** It is a research instrument with a face on it.
@@ -173,6 +176,17 @@ On a black background there is almost no red headroom.
 
 Fix: keep alpha continuous and dither with a 4×4 Bayer matrix, with jitter amplitude
 *proportional to intensity* — fixed-amplitude dither turns the soft edge into grey sand.
+
+### And a second set, from the perception side
+
+Four more, all with the same shape: **the sensor reports a number that looks plausible, so
+you debug your algorithm instead of the sensor.** Their symptom is not an error — it is
+*character*. "It seems uninterested today" turned out to be a mic whose ADC offset drifts
+(so the RMS sawtooths from 1700 to 10700 in a silent room) and a camera that classified a
+warm wooden desk as a face (so the robot believed you were always there, and never took
+initiative). Full write-ups, including one that had been quietly making an entire acoustic
+test suite pass for the wrong reason, in
+[`docs/05-perception-bugs.md`](docs/05-perception-bugs.md).
 
 ---
 
@@ -265,6 +279,8 @@ What we *are* publishing, over time:
 - [x] Expression taxonomy (71 names, semantics, target parameters)
 - [x] Wire protocol, cue vocabulary, servo safety contract
 - [x] Hardware and link-layer field notes — *seven bugs, all reproducible*
+- [x] Perception field notes — *four more, where the symptom looks like character*
+  ([`docs/05-perception-bugs.md`](docs/05-perception-bugs.md))
 - [ ] Gaze controller (camera → look-at-point)
 - [ ] Dual-mic direction-of-arrival — *"it turns when you call it"*
 - [ ] Touch–affect calibration data (n=1, then n=36)
