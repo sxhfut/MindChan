@@ -188,6 +188,27 @@ initiative). Full write-ups, including one that had been quietly making an entir
 test suite pass for the wrong reason, in
 [`docs/05-perception-bugs.md`](docs/05-perception-bugs.md).
 
+### And a third set, from the mapping side
+
+These are the ones you only find by building the thing. Most share one shape: **a declaration
+that silently does nothing**. We wrote `{"cmds":["gazeseq"]}` for a gaze dart; the device
+received it, complained about nothing, and moved nothing — there is no such command. Two are
+worse than silent:
+
+- `face:` takes **20 continuous parameters**, and the receive buffer was **192 bytes**. The
+  formatted packet is 233. So the last parameter was always truncated — and the command still
+  reported `n=19` and still changed the face. Nineteen correct axes and one stuck at its default
+  is invisible to the eye and obvious to a diff.
+- The dominance axis `d` **never left zero**: the firmware had decay but no driver. Four of the
+  eleven emotions in our taxonomy are only distinguishable *by* dominance (fear vs. sadness,
+  anger vs. joy). With `d ≡ 0` the robot could not get angry or frightened, and we did not notice
+  for two days because it merely looked *mild*.
+
+Fix pattern, for anyone doing the same: give the mapper a `check()` that fails on any action name
+not in a whitelist, any field the firmware clamps differently from the spec, and any declared
+action with no output — then call it from the test suite rather than by hand. Write-up in
+[`docs/06-embodied-mapping.md`](docs/06-embodied-mapping.md).
+
 ---
 
 ## Why not spritesheets?
@@ -281,6 +302,8 @@ What we *are* publishing, over time:
 - [x] Hardware and link-layer field notes — *seven bugs, all reproducible*
 - [x] Perception field notes — *four more, where the symptom looks like character*
   ([`docs/05-perception-bugs.md`](docs/05-perception-bugs.md))
+- [x] Embodied mapping field notes — *twenty continuous parameters, and the actions it refuses
+  to fake* ([`docs/06-embodied-mapping.md`](docs/06-embodied-mapping.md))
 - [ ] Gaze controller (camera → look-at-point)
 - [ ] Dual-mic direction-of-arrival — *"it turns when you call it"*
 - [ ] Touch–affect calibration data (n=1, then n=36)
